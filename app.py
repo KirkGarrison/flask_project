@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -18,6 +18,14 @@ class Stuff(db.Model):
 def stuff():
     title = "My stuff listing"
     if request.method == "POST":
-        return "You clicked a button"
+        stuffs_name = request.form['name']
+        new_item = Stuff(name=stuffs_name)
+        try:
+            db.session.add(new_item)
+            db.session.commit()
+            return redirect('/stuff')
+        except: 
+            return "There was an error adding your stuff..."
     else:
-        return render_template("stuff.html", title=title)
+        stuff = Stuff.query.order_by(Stuff.date_created)
+        return render_template("stuff.html", title=title, stuff=stuff)
