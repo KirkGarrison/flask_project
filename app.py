@@ -29,3 +29,8 @@ def stuff():
     else:
         stuff = Stuff.query.order_by(Stuff.date_created)
         return render_template("stuff.html", title=title, stuff=stuff)
+
+@app.route('/', methods=['GET'])
+def base():
+    title = "Home"
+    return render_template("base.html", title=title)

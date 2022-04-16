@@ -6,6 +6,20 @@
     </title>
     </head>
     <body>
-        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-gray-200">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url_for('base')}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('stuff')}}">Stuff</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        {% block content %}
+        <h1>Click 'stuff' to view Database of stuff</h1>
+        {% endblock %}
     </body>
 </html>
