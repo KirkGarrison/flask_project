@@ -12,7 +12,7 @@
     <br/>
     {% for stuffs in stuff %}
         <h4>
-            {{ stuffs.name }}
+            {{ stuffs.name }} <a href="/update/{{stuffs.id}}" class="btn btn-outline-secondary btn-sm">Update</a>
         </h4>
     {% endfor %}
 </div>

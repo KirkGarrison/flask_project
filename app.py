@@ -34,3 +34,16 @@ def stuff():
 def base():
     title = "Home"
     return render_template("base.html", title=title)
+
+@app.route('/update/<int:id>', methods=['POST', 'GET'])
+def update(id):
+    stuff_to_update = Stuff.query.get_or_404(id)
+    if request.method == "POST":
+        stuff_to_update.name = request.form['name']
+        try:
+            db.session.commit()
+            return redirect('/stuff')
+        except:
+            return "There was a problem with the update"
+    else:
+        return render_template('update.html', stuff_to_update=stuff_to_update)
