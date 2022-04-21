@@ -10,10 +10,16 @@
         <input type="submit" value="Add Name" class="btn btn-secondary">
     </form>
     <br/>
+    <table class="table table-hover table-bordered table-striped">
     {% for stuffs in stuff %}
-        <h4>
-            {{ stuffs.name }} <a href="/update/{{stuffs.id}}" class="btn btn-outline-secondary btn-sm">Update</a>
-        </h4>
+        <tr>
+            <td>
+            {{ stuffs.name }}
+            <a href="/update/{{stuffs.id}}" class="btn btn-outline-secondary btn-sm">Update</a>
+            <a href="/delete/{{stuffs.id}}" class="btn btn-outline-secondary btn-sm">Delete</a>
+            </td>
+        </tr>
     {% endfor %}
+</table>
 </div>
 {% endblock %}
