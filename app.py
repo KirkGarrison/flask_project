@@ -9,7 +9,6 @@ db = SQLAlchemy(app)
 class Stuff(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), nullable=False)
-    sweetness = db.Column(db.Integer)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -61,3 +60,25 @@ def delete(id):
         return render_template("stuff.html", title=title, stuff=stuff)
     except:
         return render_template("stuff.html", title=title, stuff=stuff)
+
+@app.route('/item/<int:id>', methods=['POST', 'GET', 'DELETE'])
+def item(id):
+    individual_item = Stuff.query.get_or_404(id)
+    if request.method == "POST":
+        individual_item.name = request.form['name']
+        try:
+            db.session.commit()
+            return redirect('/stuff')
+        except:
+            return "There was a problem with the update"
+    elif request.method == "DELETE":
+        title = "My stuff listing"
+        try:
+            db.session.delete(individual_item)
+            db.session.commit()
+            stuff = Stuff.query.order_by(Stuff.date_created)
+            return render_template("stuff.html", title=title, stuff=stuff)
+        except:
+            return "There was a problem deleting this item"
+    else:
+        return render_template('item.html', individual_item=individual_item)

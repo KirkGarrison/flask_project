@@ -14,7 +14,7 @@
     {% for stuffs in stuff %}
         <tr>
             <td>
-            {{ stuffs.name }}
+            <a href="/item/{{stuffs.id}}" class="btn btn-outline-secondary btn-sm">{{ stuffs.name }}</a>
             <a href="/update/{{stuffs.id}}" class="btn btn-outline-secondary btn-sm">Update</a>
             <a href="/delete/{{stuffs.id}}" class="btn btn-outline-secondary btn-sm">Delete</a>
             </td>

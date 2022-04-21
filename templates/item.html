@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Update Stuff{% endblock %}
 {% block content %}
 
 <div class="container">
-    <h1>{{stuff.name}}</h1>
-    
+    <table class="table table-hover table-bordered table-striped">
+            <tr>
+                <td>
+                <h1>{{ individual_item.name }}</h1>
+                <a href="/update/{{individual_item.id}}" class="btn btn-outline-secondary btn-sm">Update</a>
+                <a href="/delete/{{individual_item.id}}" class="btn btn-outline-secondary btn-sm">Delete</a>
+                </td>
+            </tr>
+    </table>
 </div>
 {% endblock %}
